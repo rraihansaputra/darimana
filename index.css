@@ -89,8 +89,12 @@ button {
     margin-left: -2.5%;
     padding-left: 2.5%;
     padding-bottom: 0.06em;
+<<<<<<< HEAD
     padding-top: 0.03em;
     margin-top: 0.04em;
+=======
+    margin-top: 0.01em;
+>>>>>>> fab18c32dbdcf8edb8aa9a887f29c448d7da6ce1
 }
 
 .stop-routes-title-link h2 {
