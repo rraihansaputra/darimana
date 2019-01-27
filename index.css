@@ -1,0 +1,108 @@
+@import url('https://rsms.me/inter/inter-ui.css');
+
+html, body {
+    height: 100%;
+}
+
+html { 
+    font-family: 'Inter UI', sans-serif; 
+    max-width: 800px; /* phone max size TODO change to better way*/
+    font-size: large;
+    /* keeping this centered on larger displays */
+    display: table;
+    margin: auto;
+}
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter UI var alt', sans-serif; }
+}
+
+body {
+    padding-top: 3em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+button {
+    background:none!important;
+    color:inherit;
+    border:none; 
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    border-bottom:0em; 
+    cursor: pointer;
+}
+
+#destination {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 0.07em solid black;
+    font-size: 2em;
+}
+
+.app-input h1,input {
+    padding-bottom: 0em;
+    padding-top: 0em;
+    margin-top: 0.1em;
+    margin-bottom: 0em;
+    width: 100%;
+}
+
+.submitlink {
+    width: 100%;
+    text-align: left;
+}
+
+.submitlink h1 {
+    color: white;
+    background-color: limegreen;
+    width: 105%;
+    margin: 0;
+    padding: 0;
+    margin-left: -2.5%;
+    padding-left: 2.5%;
+    padding-bottom: 0.06em;
+}
+
+.result-row {
+    margin-bottom: 1em;
+}
+
+.result-route-div {
+    margin-top: 0.5em;
+}
+
+.result-row h1,h2,h3,h4,h5,p {
+    padding: 0;
+    margin: 0;
+}
+
+.stop-dest-nav-link h3 {
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: #4285F4;
+    background-color: #4285F4;
+    width: 105%;
+    margin: 0;
+    padding: 0;
+    margin-left: -2.5%;
+    padding-left: 2.5%;
+    padding-bottom: 0.06em;
+    padding-top: 0.03em;
+    margin-top: 0.04em;
+}
+
+.stop-routes-title-link h2 {
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: black;
+    background-color: black;
+    width: 105%;
+    margin: 0;
+    padding: 0;
+    margin-left: -2.5%;
+    padding-left: 2.5%;
+    padding-bottom: 0.06em;
+    margin-top: 0.08em;
+}
