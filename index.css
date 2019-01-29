@@ -55,8 +55,10 @@ button {
 }
 
 .submitlink h1 {
-    color: white;
-    background-color: limegreen;
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: blue;
+    border: 4px solid limegreen;
     width: 105%;
     margin: 0;
     padding: 0;
@@ -79,29 +81,25 @@ button {
 }
 
 .stop-dest-nav-link h3 {
-    color: white;
+    color: black;
     text-decoration: underline;
-    text-decoration-color: #4285F4;
-    background-color: #4285F4;
+    text-decoration-color: transparent;
+    border: 3px solid #4285F4;
     width: 105%;
     margin: 0;
     padding: 0;
     margin-left: -2.5%;
     padding-left: 2.5%;
-    padding-bottom: 0.06em;
-<<<<<<< HEAD
-    padding-top: 0.03em;
-    margin-top: 0.04em;
-=======
-    margin-top: 0.01em;
->>>>>>> fab18c32dbdcf8edb8aa9a887f29c448d7da6ce1
+    padding-bottom: 0.07em;
+    padding-top: 0.05em;
+    margin-top: 0.05em;
 }
 
 .stop-routes-title-link h2 {
-    color: white;
+    color: black;
     text-decoration: underline;
-    text-decoration-color: black;
-    background-color: black;
+    text-decoration-color: transparent;
+    border: 4px solid black;
     width: 105%;
     margin: 0;
     padding: 0;
