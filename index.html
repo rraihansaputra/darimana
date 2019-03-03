@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class='app-input'>
-        <h1>Gw mau ke</h1><input type="text" name="destination" id="destination" autofocus>
+        <h1>Gw mau ke</h1><input type="text" name="destination" id="destination" placeholder=" " autofocus>
         <h1>naik KRL + transportasi online.</h1>
         <br>
         <button type="submit" class="submitlink">
@@ -126,5 +126,49 @@
     </div>
     <br>
 
+    <!-- JS for google autocomplete -->
+    <script type="text/javascript">
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        function initMap() {
+        var input = document.getElementById('destination');
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.setComponentRestrictions(
+            {'country': ['id']}
+        );
+
+
+        // Set the data fields to return when the user selects a place.
+        // Set fields to [''] to get all the data
+        autocomplete.setFields([
+                'address_components', 
+                'name',
+                'id',
+                'place_id',
+                'reference',
+                'url',
+                'geometry',
+                ]);
+
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            console.log(place)
+            if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+            }
+            
+        });
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=places&callback=initMap"
+    async defer></script>
 </body>
 </html>
