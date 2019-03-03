@@ -9,7 +9,10 @@
 </head>
 <body>
     <div class='app-input'>
-        <h1>Gw mau ke</h1><input type="text" name="destination" id="destination" placeholder=" " autofocus>
+        <h1>Gw mau ke</h1>
+
+        <input ref="autocomplete" class="search-location" type="text" name="destination" id="destination" placeholder=" " autofocus>
+
         <h1>naik KRL + transportasi online.</h1>
         <br>
         <button type="submit" class="submitlink">
@@ -168,7 +171,10 @@
 
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=places&callback=initMap"
-    async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=places"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script type="text/javascript" src="index.js"></script> 
 </body>
 </html>
