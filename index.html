@@ -111,7 +111,7 @@
                 <a href='https://maps.google.com' class='stop-routes-title-link'>
                     <h2>Jakarta Kota - Bogor ▼</h2>
                 </a>
-                <a href='https://maps.google.com' class='stop-routes-title-link'>
+               ˜ <a href='https://maps.google.com' class='stop-routes-title-link'>
                     <h2>Depok - Bekasi ▼</h2>
                 </a>
                 <div class="result-route-div"></div>
@@ -122,6 +122,7 @@
     </div>
     <br>
     <br>
+
     <div class='footer'>
         <p><b>drmn.app</b></p>
         <p>Something wrong? Something you want to see here?</p>
@@ -129,52 +130,10 @@
     </div>
     <br>
 
-    <!-- JS for google autocomplete -->
-    <script type="text/javascript">
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-        function initMap() {
-        var input = document.getElementById('destination');
-
-        var autocomplete = new google.maps.places.Autocomplete(input);
-
-        autocomplete.setComponentRestrictions(
-            {'country': ['id']}
-        );
-
-
-        // Set the data fields to return when the user selects a place.
-        // Set fields to [''] to get all the data
-        autocomplete.setFields([
-                'address_components', 
-                'name',
-                'id',
-                'place_id',
-                'reference',
-                'url',
-                'geometry',
-                ]);
-
-        autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            console.log(place)
-            if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-            }
-            
-        });
-
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=places"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=geometry,places,routes"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+\
     <script type="text/javascript" src="index.js"></script> 
 </body>
 </html>
