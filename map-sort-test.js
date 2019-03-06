@@ -39,7 +39,7 @@ console.log(
 //      add tracks information
 
 google.maps.geometry.spherical.computeDistanceBetween(
-    new google.maps.LatLng(6.2326307,106.8237375),
+    new google.maps.LatLng(-6.2326307,106.8237375),
     new google.maps.LatLng(-6.22, 106.85))
 
     google.maps.geometry.spherical.computeDistanceBetween(
