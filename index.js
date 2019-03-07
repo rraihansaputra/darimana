@@ -11,11 +11,16 @@ var app = new Vue ({
     },
     methods: {
       gAutocomplete: function() {
+        
+        var options = {
+          bounds: new google.maps.LatLngBounds(
+            new google.maps.LatLng(-6.68643125265198,106.51931762695312),
+            new google.maps.LatLng(-6.023116509238178,107.11395263671875)),
+          componentRestrictions: {'country': ['id']},
+          };
+        
         this.autocomplete = new google.maps.places.Autocomplete(
-          this.$refs.autocomplete)
-          this.autocomplete.setComponentRestrictions(
-              {'country': ['id']}
-          );
+          this.$refs.autocomplete, options)
     
           // Set the data fields to return when the user selects a place.
           // Set fields to [''] to get all the data
@@ -145,7 +150,7 @@ var app = new Vue ({
       },
     },
     mounted: function() {
-      this.gAutocomplete()
-      this.getData()
+      this.gAutocomplete();
+      this.getData();
     }
   });

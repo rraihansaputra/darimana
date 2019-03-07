@@ -18,9 +18,10 @@
             <br>
             <h1>Pesen dari stasiun mana ya?</h1>
         </div>
-        <br><br>
+        <br>
 
-        <div class='app-result' v-if="filteredStops.length > 0">
+        <div class='app-result' v-if="filteredStops.length > 0" ref='result'>
+            <h1 ref='result'>Pesen dari sini aja:</h1>
             <div class='result-row' v-for="stop in filteredStops" :key="stop.id">
                 <h1 class='stop-name'>St. {{ stop.name }}</h1>
                 <h2 class='stop-dest-dist'>{{ stop.formattedDist }}km ke tujuan</h2>
@@ -49,7 +50,7 @@
     </div>
 
     <div class='footer'>
-        <p><b>drmn.app</b></p>
+        <p><b>drmn.raihan.co</b></p>
         <p>Something wrong? Something you want to see here?</p>
         <p>email here -> hello [at] raihansaputra.com</p>
     </div>
@@ -57,7 +58,10 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=geometry,places,routes"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
+
+    <!--Vue dev version-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 
     <script type="text/javascript" src="index.js"></script> 
 
