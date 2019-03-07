@@ -58,6 +58,24 @@ var app = new Vue ({
       getStationName: function(stopId){
         return this.stopsBase.find(stop => stop.id == stopId).name
       },
+      getLines: function(stopId){
+        lines = Object.keys(this.stopsInfo[stopId])
+        res = []
+        for (line of lines) {
+          res.push(this.linesInfo[line])
+        }
+        return res
+      },
+      getGmapsLink: function(destinationLatLng, destinationPlaceId, originLatLng, originPlaceId){
+        baseurl = 'https://www.google.com/maps/dir/?api=1&destination=' + destinationLatLng.lat() + ','+ destinationLatLng.lng()
+        baseurl += '&destination_place_id=' + destinationPlaceId;
+        if (originPlaceId.length > 0) {
+          baseurl += '&travelmode=driving&origin=' + originLatLng.lat() + ',' + originLatLng.lng();
+          baseurl += '&origin_place_id=' + originPlaceId;
+        }
+        console.log(baseurl);
+        return baseurl
+      },
       sortByDist: function(a,b){ // TODO comments
         if (a.dist > b.dist) {
           return 1
@@ -99,7 +117,8 @@ var app = new Vue ({
           return new Promise (async (resolve, reject) => {
             result = await directionsService.route(directionsRequest, async (results, status) => {
               if (status == 'OK') {
-                var traveldist = results.routes[0].legs[0].distance.value; // get the distance
+                const traveldist = results.routes[0].legs[0].distance.value; // get the distance
+                const originGmapsId = results.geocoded_waypoints[0].place_id; 
                 result = {
                   id: stop.id,
                   dist: traveldist,
@@ -107,7 +126,7 @@ var app = new Vue ({
                   stopLatLng: stop.stopLatLng,
                   destination: place,
                   destinationLatLng: placeLatLng,
-                  // TODO get the place id to ease the render later
+                  originGmapsId: originGmapsId,
                 }
                 resolve(result);
               } else {resolve({id:stop.id, dist: traveldist, status: status})}
@@ -118,9 +137,7 @@ var app = new Vue ({
 
         // Wait for all the requests to finish
         Promise.all(travelDistancePromiseArray).then((values) => {
-          console.log('promises finished');
           this.filteredStops = values.filter(stop => stop.dist != null); // filter non successful queries
-          console.log(this.filteredStops);
         }).catch(err => {console.log(err)});
 
       },

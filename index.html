@@ -16,35 +16,31 @@
 
             <h1>naik KRL + transportasi online.</h1>
             <br>
-            <button type="submit" class="submitlink">
-                <h1 class='submitlinklabel'>Pesen dari mana ya?</h1>
-            </button>
+            <h1>Pesen dari stasiun mana ya?</h1>
         </div>
         <br><br>
 
-        <div class='app-result'>
+        <div class='app-result' v-if="filteredStops.length > 0">
             <div class='result-row' v-for="stop in filteredStops" :key="stop.id">
                 <h1 class='stop-name'>St. {{ stop.name }}</h1>
-                <h2 class='stop-dest-dist'>{{ stop.dist }} ke tujuan</h2>
-                <a href='https://maps.google.com' class='stop-dest-nav-link'>
+                <h2 class='stop-dest-dist'>{{ stop.dist }}km ke tujuan</h2>
+                <a v-bind:href="getGmapsLink(place.geometry.location, place.place_id, stop.stopLatLng, stop.originGmapsId)" target="_blank" class='stop-dest-nav-link'>
                     <h3>Cek rute ke tujuan</h3>
                 </a>
                 
                 <div class="result-route-div">
                     <h2>Stasiun ini tersedia di rute:</h2>
                 </div>
+                <span v-for="line in getLines(stop.id)">
+                    <a class='stop-routes-title-link'>
+                        <h2>{{line.longName}} <br>({{line.name}})</h2>
 
-                <a href='https://maps.google.com' class='stop-routes-title-link'>
-                    <h2>Jakarta Kota - Bogor ▼</h2> 
-                    <!-- TODO do the nojs hide/show for station list
-                    https://stackoverflow.com/questions/17731457/hide-show-content-list-with-only-css-no-javascript-used-->
-                </a>
-                <a href='https://maps.google.com' class='stop-routes-title-link'>
-                    <h2>Depok - Bekasi ▼</h2>
-                </a>
+                    </a>
+                </span>
+
                 <div class="result-route-div"></div>
-                <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                    <h3>Cek rute ke St. Tebet</h3>
+                <a v-bind:href="getGmapsLink(stop.stopLatLng, stop.originGmapsId, '', '')" target="_blank" class='stop-dest-nav-link'>
+                    <h3>Cek rute ke St. {{ stop.name }}</h3>
                 </a>
             </div>
         </div>
