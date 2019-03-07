@@ -23,7 +23,7 @@
         <div class='app-result' v-if="filteredStops.length > 0">
             <div class='result-row' v-for="stop in filteredStops" :key="stop.id">
                 <h1 class='stop-name'>St. {{ stop.name }}</h1>
-                <h2 class='stop-dest-dist'>{{ stop.dist }}km ke tujuan</h2>
+                <h2 class='stop-dest-dist'>{{ stop.formattedDist }}km ke tujuan</h2>
                 <a v-bind:href="getGmapsLink(place.geometry.location, place.place_id, stop.stopLatLng, stop.originGmapsId)" target="_blank" class='stop-dest-nav-link'>
                     <h3>Cek rute ke tujuan</h3>
                 </a>

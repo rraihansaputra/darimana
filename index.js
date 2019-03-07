@@ -69,11 +69,12 @@ var app = new Vue ({
       getGmapsLink: function(destinationLatLng, destinationPlaceId, originLatLng, originPlaceId){
         baseurl = 'https://www.google.com/maps/dir/?api=1&destination=' + destinationLatLng.lat() + ','+ destinationLatLng.lng()
         baseurl += '&destination_place_id=' + destinationPlaceId;
+
         if (originPlaceId.length > 0) {
           baseurl += '&travelmode=driving&origin=' + originLatLng.lat() + ',' + originLatLng.lng();
           baseurl += '&origin_place_id=' + originPlaceId;
         }
-        console.log(baseurl);
+
         return baseurl
       },
       sortByDist: function(a,b){ // TODO comments
@@ -122,6 +123,7 @@ var app = new Vue ({
                 result = {
                   id: stop.id,
                   dist: traveldist,
+                  formattedDist: (traveldist/1000).toFixed(2),
                   name: stop.name,
                   stopLatLng: stop.stopLatLng,
                   destination: place,
