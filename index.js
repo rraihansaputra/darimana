@@ -1,5 +1,5 @@
-var appInput = new Vue ({
-    el: '.app-input',
+var app = new Vue ({
+    el: '#app',
     data: {
         place: {},
         stopsBase:[],
@@ -30,7 +30,7 @@ var appInput = new Vue ({
             ]);
            
           this.autocomplete.addListener('place_changed', () => {
-            var place = this.autocomplete.getPlace()
+            var place = this.autocomplete.getPlace();
             this.place = place; // is the trigger correct? how to deal with the button?
             this.filterStops();
             if (!place.geometry) {
@@ -55,6 +55,9 @@ var appInput = new Vue ({
             this.linesInfo = response.data.lines;
           });
       },
+      getStationName: function(stopId){
+        return this.stopsBase.find(stop => stop.id == stopId).name
+      },
       sortByDist: function(a,b){ // TODO comments
         if (a.dist > b.dist) {
           return 1
@@ -71,40 +74,53 @@ var appInput = new Vue ({
 
         // filter by straight line distance
         var straightLineDistance = this.stopsBase.map(stop => {
-          const stopLatLng = new google.maps.LatLng(stop.lat, stop.lng);
+          const stopLatLng = new google.maps.LatLng(stop.lat, stop.lng); // Create LatLng Object
           return {
             id: stop.id,
-            stopLatLng: stopLatLng,
+            stopLatLng: stopLatLng, // Pass LatLng Object to next step
             dist: getStraightLineDistance(stopLatLng),
+            name: stop.name,
           };
-        }).sort(this.sortByDist).filter(stop => stop.dist < 10000);
+        }).sort(this.sortByDist) // function to sort by distance
+          .filter(stop => stop.dist < 10000).slice(0,10); // filter < 10km
 
         var directionsService = new google.maps.DirectionsService();
 
         var travelDistancePromiseArray = straightLineDistance.map(stop => {
-          dist = 0;
+
+          // Request Object for directions
           const directionsRequest = {
             origin: stop.stopLatLng,
             destination: placeLatLng,
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.METRIC,
           }
-          return new Promise ((resolve, reject) => {
-              directionsService.route(directionsRequest, (results, status) => {
+
+          return new Promise (async (resolve, reject) => {
+            result = await directionsService.route(directionsRequest, async (results, status) => {
               if (status == 'OK') {
-                var traveldist = results.routes[0].legs[0].distance.value;
+                var traveldist = results.routes[0].legs[0].distance.value; // get the distance
                 result = {
                   id: stop.id,
                   dist: traveldist,
+                  name: stop.name,
+                  stopLatLng: stop.stopLatLng,
+                  destination: place,
+                  destinationLatLng: placeLatLng,
+                  // TODO get the place id to ease the render later
                 }
                 resolve(result);
-              } else { resolve({id: stop.id, dist: null}); }
+              } else {resolve({id:stop.id, dist: traveldist, status: status})}
             });
           });
+      
         });
 
+        // Wait for all the requests to finish
         Promise.all(travelDistancePromiseArray).then((values) => {
-          this.filteredStops = values.filter(stop => stop.dist != null);
+          console.log('promises finished');
+          this.filteredStops = values.filter(stop => stop.dist != null); // filter non successful queries
+          console.log(this.filteredStops);
         }).catch(err => {console.log(err)});
 
       },

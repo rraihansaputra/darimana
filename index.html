@@ -8,98 +8,24 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class='app-input'>
-        <h1>Gw mau ke</h1>
+    <div id='app'>
+        <div class='app-input'>
+            <h1>Gw mau ke</h1>
 
-        <input ref="autocomplete" class="search-location" type="text" name="destination" id="destination" placeholder=" " autofocus>
+            <input ref="autocomplete" class="search-location" type="text" name="destination" id="destination" placeholder=" " autofocus>
 
-        <h1>naik KRL + transportasi online.</h1>
-        <br>
-        <button type="submit" class="submitlink">
-            <h1 class='submitlinklabel'>Pesen dari mana ya?</h1>
-        </button>
-    </div>
-    <br><br>
-
-    <div class='app-result'>
-        <div class='result-row'>
-            <h1 class='stop-name'>St. Tebet</h1>
-            <h3 class='pickup-name' style="color:#797979">Dijemput di bawah jembatan</h3>
-            <h2 class='stop-dest-dist'>2.1km ke tujuan</h2>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke tujuan</h3>
-            </a>
-            
-            <div class="result-route-div">
-                <h2>Stasiun ini tersedia di rute:</h2>
-            </div>
-
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Jakarta Kota - Bogor ▼</h2> 
-                <!-- TODO do the nojs hide/show for station list
-                https://stackoverflow.com/questions/17731457/hide-show-content-list-with-only-css-no-javascript-used-->
-            </a>
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Depok - Bekasi ▼</h2>
-            </a>
-            <div class="result-route-div"></div>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke St. Tebet</h3>
-            </a>
+            <h1>naik KRL + transportasi online.</h1>
+            <br>
+            <button type="submit" class="submitlink">
+                <h1 class='submitlinklabel'>Pesen dari mana ya?</h1>
+            </button>
         </div>
+        <br><br>
 
-        <div class='result-row'>
-            <h1 class='stop-name'>St. Cawang</h1>
-            <h3 class='pickup-name' style="color:#797979">Dijemput di depan Alfamart</h3>
-            <h2 class='stop-dest-dist'>5km ke tujuan</h2>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke tujuan</h3>
-            </a>
-            
-            <div class="result-route-div">
-                <h2>Stasiun ini tersedia di rute:</h2>
-            </div>
-
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Jakarta Kota - Bogor ▼</h2>
-            </a>
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Depok - Bekasi ▼</h2>
-            </a>
-            <div class="result-route-div"></div>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke St. Cawang</h3>
-            </a>
-        </div>
-
-        <div class='result-row'>
-            <h1 class='stop-name'>St. Cawang</h1>
-            <h3 class='pickup-name' style="color:#797979">Dijemput di depan Alfamart</h3>
-            <h2 class='stop-dest-dist'>5km ke tujuan</h2>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke tujuan</h3>
-            </a>
-            
-            <div class="result-route-div">
-                <h2>Stasiun ini tersedia di rute:</h2>
-            </div>
-
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Jakarta Kota - Bogor ▼</h2>
-            </a>
-            <a href='https://maps.google.com' class='stop-routes-title-link'>
-                <h2>Depok - Bekasi ▼</h2>
-            </a>
-            <div class="result-route-div"></div>
-            <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                <h3>Cek rute ke St. Cawang</h3>
-            </a>
-        </div>
-
-        <div class='result-row'>
-                <h1 class='stop-name'>St. Cawang</h1>
-                <h3 class='pickup-name' style="color:#797979">Dijemput di depan Alfamart</h3>
-                <h2 class='stop-dest-dist'>5km ke tujuan</h2>
+        <div class='app-result'>
+            <div class='result-row' v-for="stop in filteredStops" :key="stop.id">
+                <h1 class='stop-name'>St. {{ stop.name }}</h1>
+                <h2 class='stop-dest-dist'>{{ stop.dist }} ke tujuan</h2>
                 <a href='https://maps.google.com' class='stop-dest-nav-link'>
                     <h3>Cek rute ke tujuan</h3>
                 </a>
@@ -107,21 +33,24 @@
                 <div class="result-route-div">
                     <h2>Stasiun ini tersedia di rute:</h2>
                 </div>
-    
+
                 <a href='https://maps.google.com' class='stop-routes-title-link'>
-                    <h2>Jakarta Kota - Bogor ▼</h2>
+                    <h2>Jakarta Kota - Bogor ▼</h2> 
+                    <!-- TODO do the nojs hide/show for station list
+                    https://stackoverflow.com/questions/17731457/hide-show-content-list-with-only-css-no-javascript-used-->
                 </a>
-               ˜ <a href='https://maps.google.com' class='stop-routes-title-link'>
+                <a href='https://maps.google.com' class='stop-routes-title-link'>
                     <h2>Depok - Bekasi ▼</h2>
                 </a>
                 <div class="result-route-div"></div>
                 <a href='https://maps.google.com' class='stop-dest-nav-link'>
-                    <h3>Cek rute ke St. Cawang</h3>
+                    <h3>Cek rute ke St. Tebet</h3>
                 </a>
             </div>
+        </div>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
 
     <div class='footer'>
         <p><b>drmn.app</b></p>
@@ -133,7 +62,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKvX1De4bLuCzT3gujxmtM7Th80dB2r_c&libraries=geometry,places,routes"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-\
+
     <script type="text/javascript" src="index.js"></script> 
+
 </body>
 </html>
